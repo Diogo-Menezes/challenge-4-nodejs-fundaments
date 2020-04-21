@@ -14,6 +14,10 @@ class CreateTransactionService {
   }
 
   public execute({ title, value, type }: Request): Transaction {
+    if (type !== 'income' && type !== 'outcome') {
+      throw Error('Invalid type');
+    }
+
     const transaction = this.transactionsRepository.create({
       title,
       value,
